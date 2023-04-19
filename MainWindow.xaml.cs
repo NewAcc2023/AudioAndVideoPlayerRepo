@@ -25,19 +25,28 @@ namespace AudioAndVideoPlayer
     {
 
         DispatcherTimer? timer;
+        int hours,minutes,seconds;
+        bool isScrolling = false;
         public MainWindow()
         {
             InitializeComponent();
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
+            timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Tick += timer_Tick;
             timer.Start();
         }
         public void timer_Tick(object sender, EventArgs e)
         {
-            if (myMediaElement.NaturalDuration.HasTimeSpan)
-            {                
-                slider.Value = myMediaElement.Position.TotalSeconds;
+            if(myMediaElement.Source != null) 
+            {
+                hours = (int)myMediaElement.Position.TotalSeconds / 3600;
+                minutes = (int)myMediaElement.Position.TotalSeconds / 60 - hours * 60;
+                seconds = (int)myMediaElement.Position.TotalSeconds - hours * 3600 - minutes * 60;
+                CurrentVideoPositiom.Content = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
+                if (!isScrolling) 
+                {
+                    slider.Value = myMediaElement.Position.TotalSeconds; 
+                }
             }
         }
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
@@ -76,15 +85,29 @@ namespace AudioAndVideoPlayer
             }
         }
 
+        private void slider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isScrolling = true;
+        }
+
         private void myMediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
             if (myMediaElement.Source != null)
+            {
+                 hours = (int)myMediaElement.NaturalDuration.TimeSpan.TotalSeconds / 3600;
+                 minutes = (int)myMediaElement.NaturalDuration.TimeSpan.TotalSeconds / 60 - hours*60;
+                 seconds = (int)myMediaElement.NaturalDuration.TimeSpan.TotalSeconds - hours * 3600 - minutes*60;
                 slider.Maximum = myMediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                FullVideoLenght.Content = " / " + hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
+
+            }
+
         }
 
         private void slider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
+        { 
             myMediaElement.Position = TimeSpan.FromSeconds(slider.Value);
+            isScrolling = false;
         }
     }
 }

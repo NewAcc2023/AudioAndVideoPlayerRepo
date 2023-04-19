@@ -15,22 +15,30 @@
         <Border Margin="20,20,20,1" BorderBrush="Black" BorderThickness="1" Background="Black">
             <MediaElement Name="myMediaElement" Height="500"  LoadedBehavior="Manual" MediaOpened="myMediaElement_MediaOpened"/>
         </Border>
-        <Slider x:Name="slider" Width="1200" Maximum="{Binding ElementName=myMediaElement, Path=NaturalDuration.TimeSpan.TotalSeconds}" Height="30"  IsHitTestVisible="True" PreviewMouseUp="slider_PreviewMouseUp" >
-            <Slider.Effect>
-                <DropShadowEffect></DropShadowEffect>
-            </Slider.Effect>
-        </Slider>
-        <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Center" >
-            <Button x:Name="PlayBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="200" Click="PlayBtn_Click">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Slider x:Name="slider" Width="800" Maximum="{Binding ElementName=myMediaElement, Path=NaturalDuration.TimeSpan.TotalSeconds}" Height="30"  IsHitTestVisible="True" PreviewMouseUp="slider_PreviewMouseUp" PreviewMouseLeftButtonDown="slider_PreviewMouseLeftButtonDown" >
+                <Slider.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Slider.Effect>
+            </Slider>
+            <Label x:Name="CurrentVideoPositiom" HorizontalAlignment="Center" Content="00:00:00" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Foreground="White" />
+            <Label  x:Name="FullVideoLenght"  HorizontalAlignment="Center" Content="/ 00:00:00" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Foreground="White" />
+        </StackPanel>
+           
+       
+        <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Stretch" Width="1100">
+            <Button x:Name="PlayBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="120" Click="PlayBtn_Click">
                 Play
             </Button>
-            <Button x:Name="PauseBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="200" Margin="20,0,0,0" Click="PauseBtn_Click">
+            <Button x:Name="PauseBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="120" Margin="20,0,0,0" Click="PauseBtn_Click">
                 Pause
             </Button>
-            <Button x:Name="FindFileBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="200" Margin="20,0,0,0" Click="FindFileBtn_Click">
+            <Button x:Name="FindFileBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="120" Margin="20,0,0,0" Click="FindFileBtn_Click">
                 Find File
             </Button>
         </StackPanel>
+
         <Label x:Name="NameOfTheMedia" HorizontalAlignment="Center" Content="" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Foreground="White" />
+
     </StackPanel>
 </Window>
