@@ -45,6 +45,7 @@ namespace AudioAndVideoPlayer
                 CurrentVideoPositiom.Content = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString();
                 if (!isScrolling) 
                 {
+                    myMediaElement.Volume = VolumeSlider.Value;
                     slider.Value = myMediaElement.Position.TotalSeconds; 
                 }
             }
