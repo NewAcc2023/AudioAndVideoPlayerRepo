@@ -23,9 +23,13 @@
             </Slider>
             <Label x:Name="CurrentVideoPositiom" HorizontalAlignment="Center" Content="00:00:00" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Foreground="White" />
             <Label  x:Name="FullVideoLenght"  HorizontalAlignment="Center" Content="/ 00:00:00" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Foreground="White" />
+            <Slider x:Name="VolumeSlider" Value="0.5" Maximum="1" Margin="20,6,0,0" Minimum="0" Width="100"  Height="30"  IsHitTestVisible="True" Foreground="{x:Null}">
+                <Slider.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Slider.Effect>
+            </Slider>
         </StackPanel>
-           
-       
+
         <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Stretch" Width="1100">
             <Button x:Name="PlayBtn" Background="LightGray" FontSize="24" FontFamily="Arial" Width="120" Click="PlayBtn_Click">
                 Play
