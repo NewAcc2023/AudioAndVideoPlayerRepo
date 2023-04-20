@@ -91,6 +91,11 @@ namespace AudioAndVideoPlayer
             isScrolling = true;
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+                myMediaElement.Height = Window.ActualHeight / 1.5;
+        }
+
         private void myMediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
             if (myMediaElement.Source != null)
